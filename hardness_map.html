@@ -19,7 +19,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .custom-box {
+            width: 300px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            margin: 20px auto;
+        }
+        .container {
+            padding: 0;
+            background-color: none;
+        }
+    </style>
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
@@ -34,8 +46,19 @@
         
 </head>
 <body>    
-    
-            <div class="folium-map" id="map_bcfdfbb03baf881142ce031613ea0395" ></div>
+    <div class="container">
+        <div class="card mt-5 custom-box">
+            <div class="card-body">
+                <h4 class="card-title">Keys</h4>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>RED  :</strong> PH </li>
+                    <li class="list-group-item"><strong>BLUE :</strong> Calcium</li>
+                    <li class="list-group-item"><strong>BLACK:</strong> Potasium</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="folium-map" id="map_bcfdfbb03baf881142ce031613ea0395" ></div>
         
 </body>
 <script>    

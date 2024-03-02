@@ -4,6 +4,23 @@ body {
   background-color: #ffffff;
 }
 
+/*.rectangle {
+  width: 100px;
+  border: 2px solid #2196F3;
+  padding: 20px;
+  background-color: #f7f7f7;
+  margin: 20px auto;
+}
+
+.rectangle h4{
+  margin-top: 0;
+}
+
+.rectangle li{
+  list-style-type: none;
+  padding: 0;
+}*/
+
 .layout_padding {
   padding-top: 90px;
   padding-bottom: 90px;
@@ -690,3 +707,7 @@ a:focus {
   color: #222222;
 }
 /*# sourceMappingURL=style.css.map */
+
+
+
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to HTML Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>CSV to HTML Table</h2>
+    <table id="csv-table">
+        <thead>
+            <tr>
+                <th>content</th>
+                <th>measure</th>
+                <th>2019</th>
+                <th>within limits in percent</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be inserted here -->
+        </tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script>
+        // CSV data embedded as a string
+        const csvData = `
+        ,Geruch,"2 bei 12 °C 3 bei 25 °C","77,475","76,458","77,602",,"77,350","76,327","77,541",,125,131,61,,99.3,99.8,99.9
+        ,Trübung,"1,0 NTU","75,672","49,723","75,111",,"75,468","49,560","74,849",,204,163,262,,99.0,99.7,99.7
+        ,Färbung,"0,5 m-1","68,932","69,453","70,349",,"68,894","69,402","70,272",,38,51,77,,99.9,99.9,99.9
+        ,Leitfähigkeit,2000 µS cm-1,"77,726","75,909","74,261",,"77,726","75,907","74,260",,0,2,1,,100,100,100
+        ,pH-Wert,"nicht unter 6,5 nicht über 9,5","71,466","71,548","71,222",,"71,458","71,528","71,193",,8,20,29,,99.9,100,100
+        ,Blei,"0,01 mg/l","14,239","14,210","14,848",,"14,142","14,130","14,771",,97,80,77,,99.8,99.4,99.5
+        ,Kupfer,2 mg/l,"13,303","13,552","13,985",,"13,288","13,535","13,971",,15,17,14,,99.8,99.9,99.9
+        ,Nickel,"0,02 mg/l","14,243","14,314","14,938",,"14,210","14,267","14,888",,33,47,50,,99.9,99.7,99.7
+        ,Nitrat,50 mg/l,"17,296","16,884","16,561",,"17,284","16,881","16,559",,12,3,2,,99.9,100,100
+        ,Pestizide,"0,0001 mg/l","200,480","247,101","299,025",,"200,475","247,095","299,023",,5,6,2,,100,100,100
+        ,Escherichia coli (E. coli),0 in 100 ml,"119,357","117,981","118,860",,"119,335","117,947","118,834",,22,34,26,,99.9,100,100
+        ,Enterokokken,0 in 100 ml,"22,282","63,606","71,050",,"22,256","63,532","70,955",,26,74,95,,99.9,99.9,99.9
+        ,Coliforme Bakterien,0 in 100 ml,"119,105","118,215","118,675",,"117,938","116,712","117,629",,"1,167","1,503","1,046",,100,98.7,99.1
+        ,Koloniezahl 22 °C,*ohne anormale Veränderung oder *100/ml (*20/ml für desinfiziertes Wasser),"119,279","115,912","114,342",,"119,047","115,653","114,135",,232,259,207,,99.8,99.8,99.8
+        `;
+
+        // Function to parse CSV data and populate the table
+        function parseCSV(csvData) {
+            Papa.parse(csvData, {
+                header: false,
+                delimiter: ',',
+                complete: function(results) {
+                    const data = results.data;
+                    const tbody = document.querySelector('#csv-table tbody');
+
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+
+                        // Selecting specific columns (indices 1, 2, 5, and 18)
+                        const selectedColumns = [1, 2, 5, 17];
+                        
+                        selectedColumns.forEach(index => {
+                            const td = document.createElement('td');
+                            td.textContent = row[index] ? row[index].trim() : ''; // Check if the value exists
+                            tr.appendChild(td);
+                        });
+
+                        tbody.appendChild(tr);
+                    });
+                }
+            });
+        }
+
+        // Call the parseCSV function when the page loads
+        window.addEventListener('load', function() {
+            parseCSV(csvData);
+        });
+    </script>
+</body>
+</html>
